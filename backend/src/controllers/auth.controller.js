@@ -34,3 +34,44 @@ export const signup = async (req, res, next) => {
         next(error);
     }
 };
+
+
+export const login = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+
+        if(!email || !password) {
+            res.status(400);
+            throw new Error('Please provide email and password');
+        }
+
+        const user = await User.findOne({ email }).select('+password');
+
+        if(!user) {
+            res.status(401);
+            throw new Error('Invalid email or password');
+        }
+
+        const isMatch = await user.comparePassword(password);
+
+        if(!isMatch) {
+            res.status(401);
+            throw new Error('Invalid email or password');
+        }
+
+        const token = generateToken(user._id);
+
+        res.status(200).json({
+            success: true,
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+            },
+        });
+    } catch (error) {
+        next(error);
+    }
+};
