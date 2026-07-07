@@ -8,4 +8,4 @@ A full-stack MERN e-commerce platform for a local imitation jewellery business.
 - Deployment: Vercel (frontend), Render (backend), MongoDB Atlas (database)
 
 ## Status
-In development — Milestone 1 complete (project setup)
+In development — Backend auth (signup & login) complete
