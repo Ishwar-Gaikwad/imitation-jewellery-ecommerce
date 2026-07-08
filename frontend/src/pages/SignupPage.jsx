@@ -1,9 +1,11 @@
+import { useAuth } from '../context/AuthContext';
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from '../api/axios';
 // import { Sign } from "node:crypto";
 
 function SignupPage() {
+    const { signup } = useAuth();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,7 +28,7 @@ function SignupPage() {
 
         try {
             const res = await api.post('./auth/signup', formData);
-            localStorage.setItem('token', res.data.token);
+            login(res.data.user, res.data.token)
             navigate('/');
         } catch (err) {
             setError(err.response?.data?.message || 'Something went wrong');

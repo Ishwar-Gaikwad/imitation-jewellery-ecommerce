@@ -1,9 +1,14 @@
+import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../api/axios';
 
 function LoginPage() {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({ 
+        email: '', 
+        password: '' 
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +25,7 @@ function LoginPage() {
 
     try {
       const res = await api.post('/auth/login', formData);
-      localStorage.setItem('token', res.data.token);
+      login(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
