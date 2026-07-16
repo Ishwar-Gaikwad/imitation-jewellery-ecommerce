@@ -75,8 +75,9 @@ export const createProduct = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
     try {
         const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
+            returnDocument: 'after',
             runValidators: true,
+            context: 'query',
         });
 
         if(!product) {

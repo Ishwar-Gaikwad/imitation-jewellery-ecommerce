@@ -23,11 +23,17 @@ const productSchema = new mongoose.Schema(
             min: [0, 'Discount price cannot be negative'],
             validate: {
                 validator: function (value) {
-                    return value == null || value < this.price;
+                if (value == null) return true;
+
+                const price = typeof this.getUpdate === 'function'
+                    ? this.getUpdate().price
+                    : this.price;
+
+                return price == null || value < price;
                 },
                 message: 'Discount price must be less than the regular price',
             },
-        },
+},
 
         category: {
             type: mongoose.Schema.Types.ObjectId,
@@ -64,7 +70,11 @@ const productSchema = new mongoose.Schema(
     {
         timestamps: true,
     }
+
+    
 );
+
+
 
 productSchema.index({ name: 'text', description: 'text'});
 const Product = mongoose.model('Product', productSchema);
