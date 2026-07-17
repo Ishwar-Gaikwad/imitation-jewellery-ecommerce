@@ -2,6 +2,11 @@ import { useAuth } from './context/AuthContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import Signup from './pages/SignupPage';
+import AdminRoute from './components/AdminRoute';
+import AdminProductsPage from './pages/admin/AdminProductsPage';
+import AdminProductFormPage from './pages/admin/AdminProductFormPage';
+import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
+import AdminCategoryFormPage from './pages/admin/AdminCategoryFormPage';
 
 function HomePlaceholder() {
   const { user, loading, logout } = useAuth();
@@ -31,6 +36,55 @@ function App() {
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path='/' element={<HomePlaceholder />}/>
+
+        <Route path="/admin/products" element={
+              <AdminRoute>
+                <AdminProductsPage />
+              </AdminRoute>
+            }
+        />
+
+        <Route path="/admin/products/new" element={
+              <AdminRoute>
+                <AdminProductFormPage />
+              </AdminRoute>
+            }
+         />
+
+        <Route path="/admin/products/:id/edit" element={
+              <AdminRoute>
+                <AdminProductFormPage />
+              </AdminRoute>
+            }
+         />
+        <Route
+          path="/admin/categories"
+          element={
+            <AdminRoute>
+              <AdminCategoriesPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/categories/new"
+          element={
+            <AdminRoute>
+              <AdminCategoryFormPage />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/categories/:id/edit"
+          element={
+            <AdminRoute>
+              <AdminCategoryFormPage />
+            </AdminRoute>
+          }
+        />
+
+                
+
+
       </Routes>
     </BrowserRouter>
   );
