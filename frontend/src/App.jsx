@@ -7,6 +7,7 @@ import AdminProductsPage from './pages/admin/AdminProductsPage';
 import AdminProductFormPage from './pages/admin/AdminProductFormPage';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
 import AdminCategoryFormPage from './pages/admin/AdminCategoryFormPage';
+import CartPage from './pages/CartPage';
 
 function HomePlaceholder() {
   const { user, loading, logout } = useAuth();
@@ -81,7 +82,7 @@ function App() {
             </AdminRoute>
           }
         />
-
+        <Route path="/cart" element={<CartPage />} />
                 
 
 
