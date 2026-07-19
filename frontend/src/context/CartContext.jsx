@@ -12,31 +12,33 @@ export function CartProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
-  const addItem = (product, quantity = 1) => {
-    setItems((prevItems) => {
-      const existing = prevItems.find((item) => item.productId === product._id);
+const addItem = (product, quantity = 1) => {
+  setItems((prevItems) => {
+    const existing = prevItems.find((item) => item.productId === product._id);
 
-      if (existing) {
-        return prevItems.map((item) =>
-          item.productId === product._id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
-      }
+    if (existing) {
+      const newQuantity = Math.min(existing.quantity + quantity, product.stock);
 
-      return [
-        ...prevItems,
-        {
-          productId: product._id,
-          name: product.name,
-          image: product.images[0],
-          price: product.discountPrice || product.price,
-          stock: product.stock,
-          quantity,
-        },
-      ];
-    });
-  };
+      return prevItems.map((item) =>
+        item.productId === product._id
+          ? { ...item, quantity: newQuantity, stock: product.stock }
+          : item
+      );
+    }
+
+    return [
+      ...prevItems,
+      {
+        productId: product._id,
+        name: product.name,
+        image: product.images[0],
+        price: product.discountPrice || product.price,
+        stock: product.stock,
+        quantity: Math.min(quantity, product.stock),
+      },
+    ];
+  });
+};
 
   const removeItem = (productId) => {
     setItems((prevItems) => prevItems.filter((item) => item.productId !== productId));
