@@ -10,6 +10,8 @@ import AdminCategoryFormPage from './pages/admin/AdminCategoryFormPage';
 import CartPage from './pages/CartPage';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
 
 function HomePlaceholder() {
   const { user, loading, logout } = useAuth();
@@ -87,6 +89,8 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-confirmation" element={<OrderConfirmationPage />} />    
 
 
       </Routes>
