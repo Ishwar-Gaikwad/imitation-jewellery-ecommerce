@@ -12,6 +12,8 @@ import ProductListPage from './pages/ProductListPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
+import MyOrdersPage from './pages/MyOrdersPage';
+import ProfilePage from './pages/ProfilePage';
 
 function HomePlaceholder() {
   const { user, loading, logout } = useAuth();
@@ -90,7 +92,9 @@ function App() {
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/order-confirmation" element={<OrderConfirmationPage />} />    
+        <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+        <Route path="/my-orders" element={<MyOrdersPage />} />
+        <Route path="/profile" element={<ProfilePage />} />    
 
 
       </Routes>
