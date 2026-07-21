@@ -14,6 +14,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import MyOrdersPage from './pages/MyOrdersPage';
 import ProfilePage from './pages/ProfilePage';
+import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 
 function HomePlaceholder() {
   const { user, loading, logout } = useAuth();
@@ -95,6 +96,11 @@ function App() {
         <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
         <Route path="/my-orders" element={<MyOrdersPage />} />
         <Route path="/profile" element={<ProfilePage />} />    
+        <Route path="/admin/orders" element={
+                  <AdminRoute>
+                    <AdminOrdersPage />
+                  </AdminRoute>
+                }/>
 
 
       </Routes>
