@@ -15,35 +15,17 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import MyOrdersPage from './pages/MyOrdersPage';
 import ProfilePage from './pages/ProfilePage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
 
-function HomePlaceholder() {
-  const { user, loading, logout } = useAuth();
-
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
-
-  return (
-    <div className="text-center mt-10">
-      {user ? (
-        <>
-          <h1 className="text-2xl">Welcome, {user.name}!</h1>
-          <button onClick={logout} className="mt-4 bg-gray-800 text-white px-4 py-2 rounded">
-            Logout
-          </button>
-        </>
-      ) : (
-        <h1 className="text-2xl">Home Page (not logged in)</h1>
-      )}
-    </div>
-  );
-}
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+      <Layout>
+        <Routes>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/signup" element={<Signup/>}/>
-        <Route path='/' element={<HomePlaceholder />}/>
 
         <Route path="/admin/products" element={
               <AdminRoute>
@@ -102,8 +84,9 @@ function App() {
                   </AdminRoute>
                 }/>
 
-
+        
       </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }
